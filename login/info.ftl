@@ -1,3 +1,4 @@
+```ftl
 <#import "template.ftl" as layout>
 <@layout.registrationLayout displayMessage=false; section>
     <#if section = "pageTitle">
@@ -20,9 +21,15 @@
                     <#else>
                         <p style="color: #4a4a4a; font-size: 16px; line-height: 1.5; margin: 0 0 24px;">Email verification link is missing. Please check your spam folder or try registering again.</p>
                     </#if>
-                <#elseif message.summary?contains("updated")>
+                <#elseif message.summary?contains("updated") && requiredActions?has_content && requiredActions?seq_contains("VERIFY_EMAIL")>
                     <h2 style="color: #1a1a1a; font-size: 28px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px;">Email Verified, Bro!</h2>
                     <p style="color: #4a4a4a; font-size: 16px; line-height: 1.5; margin: 0 0 24px;">Redirecting you to sign in...</p>
+                    <script>
+                        window.location.href = "${pageRedirectUri! 'https://booking.medhabib.me/signin'}";
+                    </script>
+                <#elseif message.summary?contains("password")>
+                    <h2 style="color: #1a1a1a; font-size: 28px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px;">Password Reset, Bro!</h2>
+                    <p style="color: #4a4a4a; font-size: 16px; line-height: 1.5; margin: 0 0 24px;">Your password has been updated. Redirecting you to sign in...</p>
                     <script>
                         window.location.href = "${pageRedirectUri! 'https://booking.medhabib.me/signin'}";
                     </script>
@@ -63,3 +70,4 @@
         </div>
     </#if>
 </@layout.registrationLayout>
+```
