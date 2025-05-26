@@ -1,14 +1,114 @@
 <#import "template.ftl" as layout>
-<@layout.registrationLayout displayMessage=false; section>
+<#import "password-commons.ftl" as passwordCommons>
+<@layout.registrationLayout displayMessage=true; section>
     <#if section = "pageTitle">
-        <#if messageHeader??>
-            ${messageHeader}
+        <#if requiredActions?has_content && requiredActions?seq_contains("UPDATE_PASSWORD")>
+            Update Your BookingPlatform Password
+        <#elseif requiredActions?has_content && requiredActions?seq_contains("VERIFY_EMAIL")>
+            Verify Your BookingPlatform Email
+        <#elseif message.summary?contains("updated")>
+            Password Updated - BookingPlatform
         <#else>
-            ${message.summary}
+            ${msg("loginInfoMessage")}
         </#if>
     <#elseif section = "form">
         <div id="kc-info-message" class="no-form-wrapper">
-            <#if requiredActions?has_content && requiredActions?seq_contains("VERIFY_EMAIL")>
+            <#if requiredActions?has_content && requiredActions?seq_contains("UPDATE_PASSWORD")>
+                <div class="verify-email-container">
+                    <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="logo">
+                    <h2>Yo, Set a New Password, Bro!</h2>
+                    <p>Enter and confirm your new password below to secure your BookingPlatform account.</p>
+                    <#if message?has_content && message.type = 'error'>
+                        <div class="alert alert-error">${kcSanitize(message.summary)?no_esc}</div>
+                    </#if>
+                    <#-- Debug output -->
+                    <div class="debug-info">
+                        <p>Debug: Form action = /realms/bookingPlatform/login-actions/execute-actions</p>
+                        <p>Debug: key = ${key!''}</p>
+                        <p>Debug: stateChecker = ${stateChecker!''}</p>
+                        <p>Debug: clientId = ${clientId!'spring-boot-client'}</p>
+                        <p>Debug: redirectUri = ${pageRedirectUri!'https://booking.medhabib.me/signin'}</p>
+                        <p>Debug: queryParams = <#if url.queryString?has_content>${url.queryString}<#else>none</#if></p>
+                        <p>Debug: Current URL = ${url.currentUri}</p>
+                    </div>
+                    <form id="kc-passwd-update-form" class="${properties.kcFormClass!}" action="/realms/bookingPlatform/login-actions/execute-actions" method="post" onsubmit="return validateForm()">
+                        <input type="hidden" name="key" id="key" value="${key!''}" />
+                        <input type="hidden" name="stateChecker" id="stateChecker" value="${stateChecker!''}" />
+                        <input type="hidden" name="redirect_uri" value="${pageRedirectUri!'https://booking.medhabib.me/signin'}" />
+                        <input type="hidden" name="client_id" value="${clientId!'spring-boot-client'}" />
+                        <div class="${properties.kcFormGroupClass!}">
+                            <div class="${properties.kcLabelWrapperClass!}">
+                                <label for="password-new" class="${properties.kcLabelClass!}">New Password</label>
+                            </div>
+                            <div class="${properties.kcInputWrapperClass!}">
+                                <div class="${properties.kcInputGroup!}" dir="ltr">
+                                    <input type="password" id="password-new" name="password-new" class="${properties.kcInputClass!}" autofocus autocomplete="new-password" required minlength="6" />
+                                    <button class="${properties.kcFormPasswordVisibilityButtonClass!}" type="button" aria-label="${msg('showPassword')}" aria-controls="password-new" data-password-toggle data-icon-show="fa-eye" data-icon-hide="fa-eye-slash" data-label-show="${msg('showPassword')}" data-label-hide="${msg('hidePassword')}">
+                                        <i class="fa-eye" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="${properties.kcFormGroupClass!}">
+                            <div class="${properties.kcLabelWrapperClass!}">
+                                <label for="password-confirm" class="${properties.kcLabelClass!}">Confirm Password</label>
+                            </div>
+                            <div class="${properties.kcInputWrapperClass!}">
+                                <div class="${properties.kcInputGroup!}" dir="ltr">
+                                    <input type="password" id="password-confirm" name="password-confirm" class="${properties.kcInputClass!}" autocomplete="new-password" required />
+                                    <button class="${properties.kcFormPasswordVisibilityButtonClass!}" type="button" aria-label="${msg('showPassword')}" aria-controls="password-confirm" data-password-toggle data-icon-show="fa-eye" data-icon-hide="fa-eye-slash" data-label-show="${msg('showPassword')}" data-label-hide="${msg('hidePassword')}">
+                                        <i class="fa-eye" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <@passwordCommons.logoutOtherSessions/>
+                        <div class="${properties.kcFormGroupClass!}">
+                            <div id="kc-form-buttons" class="${properties.kcFormButtonsClass!}">
+                                <input class="${properties.kcButtonClass!} ${properties.kcButtonPrimaryClass!} ${properties.kcButtonBlockClass!} ${properties.kcButtonLargeClass!}" type="submit" value="Update Password" />
+                            </div>
+                        </div>
+                    </form>
+                    <p class="instruction">
+                        Password must be at least 6 characters long. Need help? Contact us at <a href="mailto:support@booking.medhabib.me">support@booking.medhabib.me</a>.
+                    </p>
+                    <script>
+                        function validateForm() {
+                            const newPassword = document.getElementById('password-new').value;
+                            const confirmPassword = document.getElementById('password-confirm').value;
+                            if (newPassword !== confirmPassword) {
+                                alert('Passwords do not match!');
+                                return false;
+                            }
+                            const keyInput = document.getElementById('key');
+                            const stateCheckerInput = document.getElementById('stateChecker');
+                            const urlParams = new URLSearchParams(window.location.search);
+                            const key = urlParams.get('key');
+                            if (key) {
+                                keyInput.value = key;
+                            } else if (!keyInput.value) {
+                                alert('Missing action token key!');
+                                return false;
+                            }
+                            const stateChecker = urlParams.get('stateChecker') || '${stateChecker!''}';
+                            stateCheckerInput.value = stateChecker;
+                            return true;
+                        }
+
+                        document.querySelectorAll('[data-password-toggle]').forEach(button => {
+                            button.addEventListener('click', () => {
+                                const inputId = button.getAttribute('aria-controls');
+                                const input = document.getElementById(inputId);
+                                const isPassword = input.type === 'password';
+                                input.type = isPassword ? 'text' : 'password';
+                                button.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+                                const icon = button.querySelector('i');
+                                icon.className = isPassword ? button.dataset.iconHide : button.dataset.iconShow;
+                            });
+                        });
+                    </script>
+                </div>
+            <#elseif requiredActions?has_content && requiredActions?seq_contains("VERIFY_EMAIL")>
                 <div class="verify-email-container">
                     <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="logo">
                     <h2>Yo, Verify Your Email, Bro!</h2>
@@ -20,14 +120,17 @@
                     <#else>
                         <p>Email verification link is missing. Please check your spam folder or try registering again.</p>
                     </#if>
+                    <p class="instruction">Need help? Contact us at <a href="mailto:support@booking.medhabib.me">support@booking.medhabib.me</a>.</p>
                 </div>
             <#elseif message.summary?contains("updated")>
                 <div class="verify-email-container">
                     <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="logo">
-                    <h2>Email Verified, Bro!</h2>
+                    <h2>Password Updated, Bro!</h2>
                     <p>Redirecting you to sign in...</p>
                     <script>
-                        window.location.href = "${pageRedirectUri! 'https://booking.medhabib.me/signin'}";
+                        setTimeout(() => {
+                            window.location.href = "${pageRedirectUri!'https://booking.medhabib.me/signin'}";
+                        }, 2000);
                     </script>
                 </div>
             <#else>
@@ -39,7 +142,7 @@
                     <#elseif actionUri?has_content>
                         <p><a href="${actionUri}" class="btn btn-primary" role="button">${kcSanitize(msg("proceedWithAction"))?no_esc}</a></p>
                     <#else>
-                        <p><a href="${properties.logoUrl}" class="btn btn-primary" role="button">${msg("backToApplication")}</a></p>
+                        <p><a href="${properties.logoUrl!'https://booking.medhabib.me'}" class="btn btn-primary" role="button">${msg("backToApplication")}</a></p>
                     </#if>
                 </#if>
             </#if>
