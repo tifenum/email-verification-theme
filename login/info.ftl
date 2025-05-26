@@ -1,14 +1,48 @@
 <#import "template.ftl" as layout>
-<@layout.registrationLayout displayMessage=false; section>
+<@layout.registrationLayout displayMessage=true; section>
     <#if section = "pageTitle">
-        <#if messageHeader??>
-            ${messageHeader}
+        <#if requiredActions?has_content && requiredActions?seq_contains("UPDATE_PASSWORD")>
+            Update Your BookingPlatform Password
+        <#elseif requiredActions?has_content && requiredActions?seq_contains("VERIFY_EMAIL")>
+            Verify Your BookingPlatform Email
+        <#elseif message.summary?contains("updated")>
+            Email Verified - BookingPlatform
         <#else>
             ${message.summary}
         </#if>
     <#elseif section = "form">
         <div id="kc-info-message" class="no-form-wrapper">
-            <#if requiredActions?has_content && requiredActions?seq_contains("VERIFY_EMAIL")>
+            <#if requiredActions?has_content && requiredActions?seq_contains("UPDATE_PASSWORD")>
+                <div class="verify-email-container">
+                    <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="logo">
+                    <h2>Yo, Set a New Password, Bro!</h2>
+                    <p>Enter and confirm your new password below to secure your BookingPlatform account.</p>
+                    <form id="kc-passwd-update-form" class="${properties.kcFormClass!}" action="${url.loginAction}" method="post">
+                        <div class="${properties.kcFormGroupClass!} form-group">
+                            <div class="${properties.kcLabelWrapperClass!}">
+                                <label for="password-new" class="${properties.kcLabelClass!}">New Password</label>
+                            </div>
+                            <div class="${properties.kcInputWrapperClass!}">
+                                <input type="password" id="password-new" name="password-new" class="form-input" autofocus required />
+                            </div>
+                        </div>
+                        <div class="${properties.kcFormGroupClass!} form-group">
+                            <div class="${properties.kcLabelWrapperClass!}">
+                                <label for="password-confirm" class="${properties.kcLabelClass!}">Confirm Password</label>
+                            </div>
+                            <div class="${properties.kcInputWrapperClass!}">
+                                <input type="password" id="password-confirm" name="password-confirm" class="form-input" required />
+                            </div>
+                        </div>
+                        <div class="${properties.kcFormGroupClass!} form-group">
+                            <div id="kc-form-buttons" class="${properties.kcFormButtonsClass!}">
+                                <input class="btn btn-primary" type="submit" value="Update Password" />
+                            </div>
+                        </div>
+                    </form>
+                    <p class="instruction">Need help? Contact us at <a href="mailto:support@booking.medhabib.me">support@booking.medhabib.me</a>.</p>
+                </div>
+            <#elseif requiredActions?has_content && requiredActions?seq_contains("VERIFY_EMAIL")>
                 <div class="verify-email-container">
                     <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="logo">
                     <h2>Yo, Verify Your Email, Bro!</h2>
@@ -20,6 +54,7 @@
                     <#else>
                         <p>Email verification link is missing. Please check your spam folder or try registering again.</p>
                     </#if>
+                    <p class="instruction">Need help? Contact us at <a href="mailto:support@booking.medhabib.me">support@booking.medhabib.me</a>.</p>
                 </div>
             <#elseif message.summary?contains("updated")>
                 <div class="verify-email-container">
