@@ -14,8 +14,7 @@
                 <h2 style="color: #1a1a1a; font-size: 28px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px;">Time to Reset That Password, Bro!</h2>
                 <p style="color: #4a4a4a; font-size: 16px; line-height: 1.5; margin: 0 0 24px;">For your security, please set a new password below.</p>
 
-                <form id="kc-passwd-update-form" style="display: flex; flex-direction: column; gap: 20px;" action="${url.loginResetCredentialsUrl}" method="post">
-                    <input type="hidden" name="client_id" value="spring-boot-client">
+                <form id="kc-passwd-update-form" style="display: flex; flex-direction: column; gap: 20px;" action="${url.loginAction}" method="post">
                     <div>
                         <label for="password-new" style="display: block; text-align: left; font-size: 14px; font-weight: 500; color: #1a1a1a; margin-bottom: 8px;">${msg("passwordNew")}</label>
                         <div style="position: relative;">
@@ -97,27 +96,6 @@
                         </div>
                     </div>
                 </form>
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const urlParams = new URLSearchParams(window.location.search);
-                        const params = {
-                            tab_id: urlParams.get('tab_id'),
-                            client_data: urlParams.get('client_data'),
-                            execution: urlParams.get('execution'),
-                            session_code: urlParams.get('session_code')
-                        };
-                        const form = document.getElementById('kc-passwd-update-form');
-                        for (const [key, value] of Object.entries(params)) {
-                            if (value) {
-                                const input = document.createElement('input');
-                                input.type = 'hidden';
-                                input.name = key;
-                                input.value = value;
-                                form.appendChild(input);
-                            }
-                        }
-                    });
-                </script>
             </div>
         </div>
         <script type="module" src="${url.resourcesPath}/js/passwordVisibility.js"></script>
