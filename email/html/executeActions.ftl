@@ -18,7 +18,7 @@
                     <tr>
                         <td style="background: linear-gradient(135deg, #add8e6, #87ceeb); padding: 20px; text-align: center;">
                             <#if realmName??>
-                                <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
+                                <img src="https://ibb.co/C5CDJ2hy" alt="Booking Platform Logo" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
                             </#if>
                         </td>
                     </tr>
