@@ -17,19 +17,24 @@
                     <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="logo">
                     <h2>Yo, Set a New Password, Bro!</h2>
                     <p>Enter and confirm your new password below to secure your BookingPlatform account.</p>
-                    <form id="kc-passwd-update-form" class="${properties.kcFormClass!}" action="${url.loginUpdatePasswordUrl!'#'}" method="post">
+                    <#if message?has_content && message.type = 'error'>
+                        <div class="alert alert-error">${kcSanitize(message.summary)?no_esc}</div>
+                    </#if>
+                    <form id="kc-passwd-update-form" class="${properties.kcFormClass!}" action="${url.loginUrl}/login-actions/update-password" method="post" onsubmit="return validateForm()">
                         <input type="hidden" name="stateChecker" value="${stateChecker!''}" />
+                        <input type="hidden" name="key" value="${key!''}" />
+                        <input type="hidden" name="redirect_uri" value="${pageRedirectUri!'https://booking.medhabib.me/signin'}" />
                         <div class="${properties.kcFormGroupClass!} form-group">
                             <div class="${properties.kcLabelWrapperClass!}">
-                                <label for="password-new" class="${properties.kcLabelClass!}">New Password</label>
+                                <label for="new-password" class="form-label">New Password</label>
                             </div>
                             <div class="${properties.kcInputWrapperClass!}">
-                                <input type="password" id="password-new" name="password-new" class="form-input" autofocus required />
+                                <input type="password" id="new-password" name="password-new" class="form-input" autofocus required minlength="6" title="Password must be at least 6 characters long" />
                             </div>
                         </div>
                         <div class="${properties.kcFormGroupClass!} form-group">
                             <div class="${properties.kcLabelWrapperClass!}">
-                                <label for="password-confirm" class="${properties.kcLabelClass!}">Confirm Password</label>
+                                <label for="password-confirm" class="form-label">Confirm Password</label>
                             </div>
                             <div class="${properties.kcInputWrapperClass!}">
                                 <input type="password" id="password-confirm" name="password-confirm" class="form-input" required />
@@ -41,11 +46,24 @@
                             </div>
                         </div>
                     </form>
-                    <p class="instruction">Need help? Contact us at <a href="mailto:support@booking.medhabib.me">support@booking.medhabib.me</a>.</p>
+                    <p class="instruction">
+                        Password must be at least 6 characters long. Need help? Contact us at <a href="mailto:support@booking.medhabib.me">support@booking.medhabib.me</a>.
+                    </p>
+                    <script>
+                        function validateForm() {
+                            const newPassword = document.getElementById('new-password').value;
+                            const confirmPassword = document.getElementById('password-confirm').value;
+                            if (newPassword !== confirmPassword) {
+                                alert('Passwords do not match!');
+                                return false;
+                            }
+                            return true;
+                        }
+                    </script>
                 </div>
             <#elseif requiredActions?has_content && requiredActions?seq_contains("VERIFY_EMAIL")>
                 <div class="verify-email-container">
-                    <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="logo">
+                    <img src="${url.resourcesPath}/images/favicon.png" alt="Booking Platform Logo" class="logo">
                     <h2>Yo, Verify Your Email, Bro!</h2>
                     <p>An email has been sent to your registered address. Click the button below to verify your email.</p>
                     <#if actionUri?has_content>
@@ -59,11 +77,13 @@
                 </div>
             <#elseif message.summary?contains("updated")>
                 <div class="verify-email-container">
-                    <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="logo">
-                    <h2>Email Verified, Bro!</h2>
+                    <img src="${url.resourcesPath}/images/favicon.png" alt="Booking Platform Logo" class="logo">
+                    <h2>Password Updated, Bro!</h2>
                     <p>Redirecting you to sign in...</p>
                     <script>
-                        window.location.href = "${pageRedirectUri! 'https://booking.medhabib.me/signin'}";
+                        setTimeout(() => {
+                            window.location.href = "${pageRedirectUri! 'https://booking.medhabib.me/signin'}";
+                        }, 2000);
                     </script>
                 </div>
             <#else>
