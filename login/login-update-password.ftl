@@ -21,7 +21,7 @@
                 <p>Debug: redirectUri = ${pageRedirectUri!'https://booking.medhabib.me/signin'}</p>
                 <p>Debug: queryParams = <#if url.queryString?has_content>${url.queryString}<#else>none</#if></p>
             </div>
-            <form id="kc-passwd-update-form" class="${properties.kcFormClass!}" action="/realms/bookingPlatform/login-actions/execute-actions" method="post" onsubmit="return validateForm()">
+            <form id="kc-passwd-update-form" class="${properties.kcFormClass!}" action="/realms/bookingPlatform/login-actions/execute-actions" method="post">
                 <input type="hidden" name="key" id="key" value="${key!''}" />
                 <input type="hidden" name="stateChecker" id="stateChecker" value="${stateChecker!''}" />
                 <input type="hidden" name="redirect_uri" value="${pageRedirectUri!'https://booking.medhabib.me/signin'}" />
