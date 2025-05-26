@@ -17,7 +17,8 @@
                     <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="logo">
                     <h2>Yo, Set a New Password, Bro!</h2>
                     <p>Enter and confirm your new password below to secure your BookingPlatform account.</p>
-                    <form id="kc-passwd-update-form" class="${properties.kcFormClass!}" action="${url.loginAction}" method="post">
+                    <form id="kc-passwd-update-form" class="${properties.kcFormClass!}" action="${url.loginUpdatePasswordUrl!'#'}" method="post">
+                        <input type="hidden" name="stateChecker" value="${stateChecker!''}" />
                         <div class="${properties.kcFormGroupClass!} form-group">
                             <div class="${properties.kcLabelWrapperClass!}">
                                 <label for="password-new" class="${properties.kcLabelClass!}">New Password</label>
@@ -74,7 +75,7 @@
                     <#elseif actionUri?has_content>
                         <p><a href="${actionUri}" class="btn btn-primary" role="button">${kcSanitize(msg("proceedWithAction"))?no_esc}</a></p>
                     <#else>
-                        <p><a href="${properties.logoUrl}" class="btn btn-primary" role="button">${msg("backToApplication")}</a></p>
+                        <p><a href="${properties.logoUrl!'https://booking.medhabib.me'}" class="btn btn-primary" role="button">${msg("backToApplication")}</a></p>
                     </#if>
                 </#if>
             </#if>
