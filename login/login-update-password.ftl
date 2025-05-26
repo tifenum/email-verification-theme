@@ -4,21 +4,22 @@
     <#if section = "header">
         ${msg("updatePasswordTitle")}
     <#elseif section = "form">
-        <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#add8e6] to-[#87ceeb]" style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-            <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-xl text-center mx-5 transition-transform duration-300 hover:-translate-y-1">
-                <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="w-24 mx-auto mb-5">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4 tracking-tight">Time to Reset That Password, Bro!</h2>
-                <p class="text-gray-500 text-base mb-6 leading-relaxed">For your security, please set a new password below.</p>
+        <div style="background: linear-gradient(135deg, #add8e6 0%, #87ceeb 100%); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+            <div style="background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); padding: 32px; max-width: 500px; width: 90%; text-align: center; margin: 20px auto; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" style="max-width: 100px; margin: 0 auto 20px; display: block;">
+                <h2 style="color: #1a1a1a; font-size: 28px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px;">Time to Reset That Password, Bro!</h2>
+                <p style="color: #4a4a4a; font-size: 16px; line-height: 1.5; margin: 0 0 24px;">For your security, please set a new password below.</p>
 
-                <form id="kc-passwd-update-form" class="space-y-6" action="${url.loginResetCredentialsUrl}" method="post">
+                <form id="kc-passwd-update-form" style="display: flex; flex-direction: column; gap: 24px;" action="${url.loginResetCredentialsUrl}" method="post">
                     <div>
-                        <label for="password-new" class="block text-sm font-medium text-gray-700 text-left">${msg("passwordNew")}</label>
-                        <div class="relative mt-1">
-                            <input type="password" id="password-new" name="password-new" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#ff4500] focus:border-[#ff4500] transition-colors duration-200" 
+                        <label for="password-new" style="display: block; text-align: left; font-size: 14px; font-weight: 500; color: #1a1a1a;">${msg("passwordNew")}</label>
+                        <div style="position: relative; margin-top: 8px;">
+                            <input type="password" id="password-new" name="password-new" style="width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 16px; outline: none; transition: border-color 0.2s ease;"
                                    autofocus autocomplete="new-password"
-                                   aria-invalid="<#if messagesPerField.existsError('password','password-confirm')>true</#if>">
-                            <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3" aria-label="${msg('showPassword')}"
-                                    aria-controls="password-new" data-password-toggle
+                                   aria-invalid="<#if messagesPerField.existsError('password','password-confirm')>true</#if>"
+                                   onfocus="this.style.borderColor='#ff4500';" onblur="this.style.borderColor='#d1d5db';">
+                            <button type="button" style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%); background: none; border: none; cursor: pointer;" 
+                                    aria-label="${msg('showPassword')}" aria-controls="password-new" data-password-toggle
                                     data-icon-show="${properties.kcFormPasswordVisibilityIconShow!}" 
                                     data-icon-hide="${properties.kcFormPasswordVisibilityIconHide!}"
                                     data-label-show="${msg('showPassword')}" data-label-hide="${msg('hidePassword')}">
@@ -26,20 +27,21 @@
                             </button>
                         </div>
                         <#if messagesPerField.existsError('password')>
-                            <span id="input-error-password" class="text-red-600 text-sm mt-1 block text-left" aria-live="polite">
+                            <span id="input-error-password" style="color: #dc2626; font-size: 12px; margin-top: 4px; display: block; text-align: left;" aria-live="polite">
                                 ${kcSanitize(messagesPerField.get('password'))?no_esc}
                             </span>
                         </#if>
                     </div>
 
                     <div>
-                        <label for="password-confirm" class="block text-sm font-medium text-gray-700 text-left">${msg("passwordConfirm")}</label>
-                        <div class="relative mt-1">
-                            <input type="password" id="password-confirm" name="password-confirm" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#ff4500] focus:border-[#ff4500] transition-colors duration-200" 
+                        <label for="password-confirm" style="display: block; text-align: left; font-size: 14px; font-weight: 500; color: #1a1a1a;">${msg("passwordConfirm")}</label>
+                        <div style="position: relative; margin-top: 8px;">
+                            <input type="password" id="password-confirm" name="password-confirm" style="width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 16px; outline: none; transition: border-color 0.2s ease;"
                                    autocomplete="new-password"
-                                   aria-invalid="<#if messagesPerField.existsError('password-confirm')>true</#if>">
-                            <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3" aria-label="${msg('showPassword')}"
-                                    aria-controls="password-confirm" data-password-toggle
+                                   aria-invalid="<#if messagesPerField.existsError('password-confirm')>true</#if>"
+                                   onfocus="this.style.borderColor='#ff4500';" onblur="this.style.borderColor='#d1d5db';">
+                            <button type="button" style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%); background: none; border: none; cursor: pointer;" 
+                                    aria-label="${msg('showPassword')}" aria-controls="password-confirm" data-password-toggle
                                     data-icon-show="${properties.kcFormPasswordVisibilityIconShow!}" 
                                     data-icon-hide="${properties.kcFormPasswordVisibilityIconHide!}"
                                     data-label-show="${msg('showPassword')}" data-label-hide="${msg('hidePassword')}">
@@ -47,7 +49,7 @@
                             </button>
                         </div>
                         <#if messagesPerField.existsError('password-confirm')>
-                            <span id="input-error-password-confirm" class="text-red-600 text-sm mt-1 block text-left" aria-live="polite">
+                            <span id="input-error-password-confirm" style="color: #dc2626; font-size: 12px; margin-top: 4px; display: block; text-align: left;" aria-live="polite">
                                 ${kcSanitize(messagesPerField.get('password-confirm'))?no_esc}
                             </span>
                         </#if>
@@ -55,16 +57,28 @@
 
                     <div>
                         <@passwordCommons.logoutOtherSessions/>
-                        <div class="flex justify-center space-x-4">
+                        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
                             <#if isAppInitiatedAction??>
-                                <button type="submit" class="px-6 py-2 bg-[#ff4500] text-white font-semibold rounded-lg hover:bg-[#e03e00] focus:outline-none focus:ring-2 focus:ring-[#ff4500] transition-transform duration-200 hover:scale-105 active:scale-95">
+                                <button type="submit" style="display: inline-block; background-color: #ff4500; color: #ffffff; font-size: 16px; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: none; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease;"
+                                        onmouseover="this.style.backgroundColor='#e03e00'; this.style.transform='scale(1.05)';" 
+                                        onmouseout="this.style.backgroundColor='#ff4500'; this.style.transform='scale(1)';" 
+                                        onmousedown="this.style.transform='scale(0.95)';" 
+                                        onmouseup="this.style.transform='scale(1.05)';">
                                     ${msg("doSubmit")}
                                 </button>
-                                <button type="submit" name="cancel-aia" value="true" class="px-6 py-2 bg-gray-300 text-gray-800 font-semibold rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-transform duration-200 hover:scale-105 active:scale-95">
+                                <button type="submit" name="cancel-aia" value="true" style="display: inline-block; background-color: #d1d5db; color: #1a1a1a; font-size: 16px; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: none; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease;"
+                                        onmouseover="this.style.backgroundColor='#b3b7c1'; this.style.transform='scale(1.05)';" 
+                                        onmouseout="this.style.backgroundColor='#d1d5db'; this.style.transform='scale(1)';" 
+                                        onmousedown="this.style.transform='scale(0.95)';" 
+                                        onmouseup="this.style.transform='scale(1.05)';">
                                     ${msg("doCancel")}
                                 </button>
                             <#else>
-                                <button type="submit" class="w-full px-6 py-2 bg-[#ff4500] text-white font-semibold rounded-lg hover:bg-[#e03e00] focus:outline-none focus:ring-2 focus:ring-[#ff4500] transition-transform duration-200 hover:scale-105 active:scale-95">
+                                <button type="submit" style="display: inline-block; width: 100%; background-color: #ff4500; color: #ffffff; font-size: 16px; font-weight: 600; padding: 12px 24px; border-radius: 8px; border: none; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease;"
+                                        onmouseover="this.style.backgroundColor='#e03e00'; this.style.transform='scale(1.05)';" 
+                                        onmouseout="this.style.backgroundColor='#ff4500'; this.style.transform='scale(1)';" 
+                                        onmousedown="this.style.transform='scale(0.95)';" 
+                                        onmouseup="this.style.transform='scale(1.05)';">
                                     ${msg("doSubmit")}
                                 </button>
                             </#if>
