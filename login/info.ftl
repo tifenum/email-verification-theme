@@ -27,7 +27,7 @@
                     <h2>Time to Reset That Password!</h2>
                     <p>For your security, please reset your password using the form below.</p>
                     
-                    <form id="kc-update-password-form" action="${url.getLoginAction()}" method="post">
+                    <form id="kc-update-password-form" action="${url.loginAction()}" method="post">
                         <div class="form-group">
                             <label for="password-new">${msg("passwordNew")}</label>
                             <input type="password" id="password-new" name="password-new" class="form-control" autocomplete="new-password" required>
