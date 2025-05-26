@@ -1,4 +1,3 @@
-```ftl
 <#import "template.ftl" as layout>
 <@layout.registrationLayout displayMessage=false; section>
     <#if section = "pageTitle">
@@ -70,4 +69,3 @@
         </div>
     </#if>
 </@layout.registrationLayout>
-```
