@@ -1,4 +1,5 @@
 <#import "template.ftl" as layout>
+<#import "password-commons.ftl" as passwordCommons>
 <@layout.registrationLayout displayMessage=true; section>
     <#if section = "pageTitle">
         <#if requiredActions?has_content && requiredActions?seq_contains("UPDATE_PASSWORD")>
@@ -6,9 +7,9 @@
         <#elseif requiredActions?has_content && requiredActions?seq_contains("VERIFY_EMAIL")>
             Verify Your BookingPlatform Email
         <#elseif message.summary?contains("updated")>
-            Email Verified - BookingPlatform
+            Password Updated - BookingPlatform
         <#else>
-            ${message.summary}
+            ${msg("loginInfoMessage")}
         </#if>
     <#elseif section = "form">
         <div id="kc-info-message" class="no-form-wrapper">
@@ -25,11 +26,12 @@
                         <p>Debug: Form action = ${url.loginUrl}/login-actions/execute-actions?key=${key!''}</p>
                         <p>Debug: key = ${key!''}</p>
                         <p>Debug: stateChecker = ${stateChecker!''}</p>
-                        <p>Debug: clientId = ${clientId!''}</p>
+                        <p>Debug: clientId = ${clientId!'spring-boot-client'}</p>
+                        <p>Debug: redirectUri = ${pageRedirectUri!'https://booking.medhabib.me/signin'}</p>
+                        <p>Debug: queryParams = <#if url.queryString?has_content>${url.queryString}<#else>none</#if></p>
                     </div>
                     <form id="kc-passwd-update-form" class="${properties.kcFormClass!}" action="${url.loginUrl}/login-actions/execute-actions?key=${key!''}" method="post" onsubmit="return validateForm()">
                         <input type="hidden" name="stateChecker" value="${stateChecker!''}" />
-                        <input type="hidden" name="key" value="${key!''}" />
                         <input type="hidden" name="redirect_uri" value="${pageRedirectUri!'https://booking.medhabib.me/signin'}" />
                         <input type="hidden" name="client_id" value="${clientId!'spring-boot-client'}" />
                         <div class="${properties.kcFormGroupClass!} form-group">
@@ -58,6 +60,7 @@
                                 </div>
                             </div>
                         </div>
+                        <@passwordCommons.logoutOtherSessions/>
                         <div class="${properties.kcFormGroupClass!} form-group">
                             <div id="kc-form-buttons" class="${properties.kcFormButtonsClass!}">
                                 <input class="btn btn-primary" type="submit" value="Update Password" />
