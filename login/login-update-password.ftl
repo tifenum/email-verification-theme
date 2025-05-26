@@ -1,4 +1,3 @@
-```ftl
 <#import "template.ftl" as layout>
 <#import "password-commons.ftl" as passwordCommons>
 <@layout.registrationLayout displayMessage=!messagesPerField.existsError('password','password-confirm'); section>
@@ -102,4 +101,3 @@
         <script type="module" src="${url.resourcesPath}/js/passwordVisibility.js"></script>
     </#if>
 </@layout.registrationLayout>
-```
