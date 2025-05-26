@@ -23,15 +23,17 @@
                     </#if>
                     <#-- Debug output -->
                     <div class="debug-info">
-                        <p>Debug: Form action = ${url.loginUrl}/login-actions/execute-actions?key=${key!''}</p>
+                        <p>Debug: Form action = /realms/bookingPlatform/login-actions/execute-actions</p>
                         <p>Debug: key = ${key!''}</p>
                         <p>Debug: stateChecker = ${stateChecker!''}</p>
                         <p>Debug: clientId = ${clientId!'spring-boot-client'}</p>
                         <p>Debug: redirectUri = ${pageRedirectUri!'https://booking.medhabib.me/signin'}</p>
                         <p>Debug: queryParams = <#if url.queryString?has_content>${url.queryString}<#else>none</#if></p>
+                        <p>Debug: Current URL = ${url.currentUri}</p>
                     </div>
-                    <form id="kc-passwd-update-form" class="${properties.kcFormClass!}" action="${url.loginUrl}/login-actions/execute-actions?key=${key!''}" method="post" onsubmit="return validateForm()">
-                        <input type="hidden" name="stateChecker" value="${stateChecker!''}" />
+                    <form id="kc-passwd-update-form" class="${properties.kcFormClass!}" action="/realms/bookingPlatform/login-actions/execute-actions" method="post" onsubmit="return validateForm()">
+                        <input type="hidden" name="key" id="key" value="${key!''}" />
+                        <input type="hidden" name="stateChecker" id="stateChecker" value="${stateChecker!''}" />
                         <input type="hidden" name="redirect_uri" value="${pageRedirectUri!'https://booking.medhabib.me/signin'}" />
                         <input type="hidden" name="client_id" value="${clientId!'spring-boot-client'}" />
                         <div class="${properties.kcFormGroupClass!} form-group">
@@ -78,6 +80,19 @@
                                 alert('Passwords do not match!');
                                 return false;
                             }
+                            const keyInput = document.getElementById('key');
+                            const stateCheckerInput = document.getElementById('stateChecker');
+                            const urlParams = new URLSearchParams(window.location.search);
+                            const key = urlParams.get('key');
+                            if (key) {
+                                keyInput.value = key;
+                            } else if (!keyInput.value) {
+                                alert('Missing action token key!');
+                                return false;
+                            }
+                            // Set stateChecker if available
+                            const stateChecker = urlParams.get('stateChecker') || '';
+                            stateCheckerInput.value = stateChecker;
                             return true;
                         }
 
