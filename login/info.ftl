@@ -21,27 +21,6 @@
                         <p>Email verification link is missing. Please check your spam folder or try registering again.</p>
                     </#if>
                 </div>
-            <#elseif requiredActions?has_content && requiredActions?seq_contains("UPDATE_PASSWORD")>
-                <div class="update-password-container">
-                    <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="logo">
-                    <h2>Time to Reset That Password!</h2>
-                    <p>For your security, please reset your password using the form below.</p>
-                    
-                    <form id="kc-update-password-form" action="${url.loginAction()}" method="post">
-                        <div class="form-group">
-                            <label for="password-new">${msg("passwordNew")}</label>
-                            <input type="password" id="password-new" name="password-new" class="form-control" autocomplete="new-password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password-confirm">${msg("passwordConfirm")}</label>
-                            <input type="password" id="password-confirm" name="password-confirm" class="form-control" autocomplete="new-password" required>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Update Password</button>
-                        </div>
-                    </form>
-                </div>
-            
             <#elseif message.summary?contains("updated")>
                 <div class="verify-email-container">
                     <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" class="logo">
