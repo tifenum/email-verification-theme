@@ -10,7 +10,7 @@
         </style>
         <div style="background: linear-gradient(135deg, #add8e6 0%, #87ceeb 100%); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center;">
             <div style="background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); padding: 32px; max-width: 500px; width: 90%; text-align: center; margin: 20px auto; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-                <img src="${url.resourcesPath}/img/favicon.png" alt="Booking Platform Logo" style="max-width: 100px; margin: 0 auto 20px; display: block;">
+                <img src="https://booking.medhabib.me/images/favicon.png" alt="Booking Platform Logo" style="max-width: 100px; margin: 0 auto 20px; display: block;">
                 <h2 style="color: #1a1a1a; font-size: 28px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px;">Time to Reset That Password, Bro!</h2>
                 <p style="color: #4a4a4a; font-size: 16px; line-height: 1.5; margin: 0 0 24px;">For your security, please set a new password below.</p>
 
