@@ -52,7 +52,7 @@
                     <#else>
                         <#if pageRedirectUri?has_content>
                             <p>
-                                <a href="${pageRedirectUri}" style="display: inline-block; background-color: #ff4500; color: #ffffff; font-size: 16px; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; transition: background-color 0.3s ease, transform 0.2s ease;" onmouseover="this.style.backgroundColor='#e03e00'; this.style.transform='scale(1.05)';" onmouseout="this.style.backgroundColor='#ff4500'; this.style.transform='scale(1)';" onmousedown="this.style.transform='scale(0.95)';" onmouseup="this.style.transform='scale(1.05)';">${msg("backToApplication")}</a>
+                                <a href="${pageRedirectUri}" style="display: inline-block; background-color: #ff4500; color: #ffffff; font-size: 16px; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; transition: background-color 0.3s ease, transform 0.2s ease;" onmouseover="this.style.backgroundColor='#e03e00'; this.style.transform='scale(1.05)';" onmouseout="this.style.backgroundColor='#ff4500'; this.style.transform='scale(1)';" onmousedown="this.style.transform='scale(0.95)';" onmouseup="this.style.transform='scale(1.05)';">Back to Application</a>
                             </p>
                         <#elseif actionUri?has_content>
                             <p>
@@ -60,7 +60,7 @@
                             </p>
                         <#else>
                             <p>
-                                <a href="${properties.logoUrl!'https://booking.medhabib.me/signin'}" style="display: inline-block; background-color: #ff4500; color: #ffffff; font-size: 16px; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; transition: background-color 0.3s ease, transform 0.2s ease;" onmouseover="this.style.backgroundColor='#e03e00'; this.style.transform='scale(1.05)';" onmouseout="this.style.backgroundColor='#ff4500'; this.style.transform='scale(1)';" onmousedown="this.style.transform='scale(0.95)';" onmouseup="this.style.transform='scale(1.05)';">${msg("backToApplication")}</a>
+                                <a href="${properties.logoUrl!'https://booking.medhabib.me/signin'}" style="display: inline-block; background-color: #ff4500; color: #ffffff; font-size: 16px; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; transition: background-color 0.3s ease, transform 0.2s ease;" onmouseover="this.style.backgroundColor='#e03e00'; this.style.transform='scale(1.05)';" onmouseout="this.style.backgroundColor='#ff4500'; this.style.transform='scale(1)';" onmousedown="this.style.transform='scale(0.95)';" onmouseup="this.style.transform='scale(1.05)';">Back to Application</a>
                             </p>
                         </#if>
                     </#if>
