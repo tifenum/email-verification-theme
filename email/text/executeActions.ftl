@@ -1,21 +1,21 @@
 <#if requiredActions?seq_contains("UPDATE_PASSWORD")>
-Yo, Reset Your Password, Bro!
+Reset Your Password
 
-We received a request to reset your password for your BookingPlatform account. Click the link below to set a new password. This link expires in 15 minutes, so act fast!
+We have received a request to reset the password for your BookingPlatform account. Please click the link below to set a new password. This link will expire in 15 minutes.
 
 ${link}
 
-If you didn’t request a password reset, just ignore this email, and your account will stay secure.
+If you did not request a password reset, please ignore this email, and your account will remain secure.
 
-Need help? Contact us at support@booking.medhabib.me.
+For assistance, please contact us at support@booking.medhabib.me.
 <#else>
-Yo, Verify Your Email, Bro!
+Verify Your Email Address
 
-We sent you this email to verify your BookingPlatform account. Click the link below to confirm your email address. This link expires in 15 minutes, so don’t wait!
+This email was sent to verify your BookingPlatform account. Please click the link below to confirm your email address. This link will expire in 15 minutes.
 
 ${link}
 
-If you didn’t request this, just ignore this email, and nothing will change.
+If you did not request this verification, please ignore this email, and no changes will be made to your account.
 
-Need help? Contact us at support@booking.medhabib.me.
+For assistance, please contact us at support@booking.medhabib.me.
 </#if>

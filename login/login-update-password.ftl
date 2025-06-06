@@ -11,19 +11,19 @@
         <div style="background: linear-gradient(135deg, #add8e6 0%, #87ceeb 100%); font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; min-height: 100vh; display: flex; justify-content: center; align-items: center;">
             <div style="background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); padding: 32px; max-width: 500px; width: 90%; text-align: center; margin: 20px auto; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
                 <img src="https://booking.medhabib.me/images/favicon.png" alt="Booking Platform Logo" style="max-width: 100px; margin: 0 auto 20px; display: block;">
-                <h2 style="color: #1a1a1a; font-size: 28px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px;">Time to Reset That Password, Bro!</h2>
-                <p style="color: #4a4a4a; font-size: 16px; line-height: 1.5; margin: 0 0 24px;">For your security, please set a new password below.</p>
+                <h2 style="color: #1a1a1a; font-size: 28px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.5px;">Reset Your Password</h2>
+                <p style="color: #4a4a4a; font-size: 16px; line-height: 1.5; margin: 0 0 24px;">Please enter a new password below to secure your account.</p>
 
                 <form id="kc-passwd-update-form" style="display: flex; flex-direction: column; gap: 20px;" action="${url.loginAction}" method="post">
                     <div>
                         <label for="password-new" style="display: block; text-align: left; font-size: 14px; font-weight: 500; color: #1a1a1a; margin-bottom: 8px;">${msg("passwordNew")}</label>
                         <div style="position: relative;">
-                            <input type="password" id="password-new" name="password-new" style="width: 100%; padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 16px; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"
+                            <input type="password" id="password-new" name="password-new" style="width: 75%; padding: 12px 48px 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 16px; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"
                                    autofocus autocomplete="new-password"
                                    aria-invalid="<#if messagesPerField.existsError('password','password-confirm')>true</#if>"
                                    onfocus="this.style.borderColor='#ff4500'; this.style.boxShadow='0 0 0 3px rgba(255,69,0,0.1);'" 
                                    onblur="this.style.borderColor='#d1d5db'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.1);'">
-                            <button type="button" style="position: absolute; top: 50%; right: 16px; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #4a4a4a;" 
+                            <button type="button" style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #4a4a4a;" 
                                     aria-label="${msg('showPassword')}" aria-controls="password-new" data-password-toggle
                                     data-icon-show="${properties.kcFormPasswordVisibilityIconShow!}" 
                                     data-icon-hide="${properties.kcFormPasswordVisibilityIconHide!}"
@@ -41,12 +41,12 @@
                     <div>
                         <label for="password-confirm" style="display: block; text-align: left; font-size: 14px; font-weight: 500; color: #1a1a1a; margin-bottom: 8px;">${msg("passwordConfirm")}</label>
                         <div style="position: relative;">
-                            <input type="password" id="password-confirm" name="password-confirm" style="width: 100%; padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 16px; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"
+                            <input type="password" id="password-confirm" name="password-confirm" style="width: 75%; padding: 12px 48px 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 16px; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"
                                    autocomplete="new-password"
                                    aria-invalid="<#if messagesPerField.existsError('password-confirm')>true</#if>"
                                    onfocus="this.style.borderColor='#ff4500'; this.style.boxShadow='0 0 0 3px rgba(255,69,0,0.1);'" 
                                    onblur="this.style.borderColor='#d1d5db'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.1);'">
-                            <button type="button" style="position: absolute; top: 50%; right: 16px; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #4a4a4a;" 
+                            <button type="button" style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%); background: none; border: none; padding: 0; cursor: pointer; color: #4a4a4a;" 
                                     aria-label="${msg('showPassword')}" aria-controls="password-confirm" data-password-toggle
                                     data-icon-show="${properties.kcFormPasswordVisibilityIconShow!}" 
                                     data-icon-hide="${properties.kcFormPasswordVisibilityIconHide!}"

@@ -25,17 +25,17 @@
                     <tr>
                         <td style="padding: 32px; text-align: center;">
                             <#if requiredActions?seq_contains("UPDATE_PASSWORD")>
-                                <h1 style="color: #1a1a1a; font-size: 26px; font-weight: bold; margin: 0 0 16px;">Yo, Reset Your Password, Bro!</h1>
-                                <p style="font-size: 16px; color: #4a4a4a; margin: 0 0 24px;">We received a request to reset your password for your BookingPlatform account. Hit the button below to set a new password. This link expires in 15 minutes, so act fast!</p>
-                                <a href="${link}" style="display: inline-block; background-color: #ff4500; color: #ffffff; font-size: 16px; font-weight: bold; padding: 12px 32px; border-radius: 6px; text-decoration: none;">Reset Password Now</a>
-                                <p style="font-size: 14px; color: #4a4a4a; margin: 24px 0 0;">Didn’t request a password reset? No stress—just ignore this email, and your account will stay secure.</p>
+                                <h1 style="color: #1a1a1a; font-size: 26px; font-weight: bold; margin: 0 0 16px;">Reset Your Password</h1>
+                                <p style="font-size: 16px; color: #4a4a4a; margin: 0 0 24px;">We received a request to reset the password for your BookingPlatform account. Please click the button below to set a new password. This link will expire in 15 minutes.</p>
+                                <a href="${link}" style="display: inline-block; background-color: #ff4500; color: #ffffff; font-size: 16px; font-weight: bold; padding: 12px 32px; border-radius: 6px; text-decoration: none;">Reset Password</a>
+                                <p style="font-size: 14px; color: #4a4a4a; margin: 24px 0 0;">If you did not request a password reset, please ignore this email, and your account will remain secure.</p>
                             <#else>
-                                <h1 style="color: #1a1a1a; font-size: 26px; font-weight: bold; margin: 0 0 16px;">Yo, Verify Your Email, Bro!</h1>
-                                <p style="font-size: 16px; color: #4a4a4a; margin: 0 0 24px;">We sent this email to verify your BookingPlatform account. Hit the button below to confirm your email address. This link expires in 15 minutes, so don’t wait!</p>
-                                <a href="${link}" style="display: inline-block; background-color: #ff4500; color: #ffffff; font-size: 16px; font-weight: bold; padding: 12px 32px; border-radius: 6px; text-decoration: none;">Verify Email Now</a>
-                                <p style="font-size: 14px; color: #4a4a4a; margin: 24px 0 0;">Didn’t request this? No stress—just ignore this email, and nothing will change.</p>
+                                <h1 style="color: #1a1a1a; font-size: 26px; font-weight: bold; margin: 0 0 16px;">Verify Your Email Address</h1>
+                                <p style="font-size: 16px; color: #4a4a4a; margin: 0 0 24px;">This email was sent to verify your BookingPlatform account. Please click the button below to confirm your email address. This link will expire in 15 minutes.</p>
+                                <a href="${link}" style="display: inline-block; background-color: #ff4500; color: #ffffff; font-size: 16px; font-weight: bold; padding: 12px 32px; border-radius: 6px; text-decoration: none;">Verify Email</a>
+                                <p style="font-size: 14px; color: #4a4a4a; margin: 24px 0 0;">If you did not request this verification, please ignore this email, and no changes will be made to your account.</p>
                             </#if>
-                            <p style="font-size: 14px; color: #4a4a4a; margin: 16px 0 0;">Need help? Contact us at <a href="mailto:support@booking.medhabib.me" style="color: #ff4500; text-decoration: underline;">support@booking.medhabib.me</a>.</p>
+                            <p style="font-size: 14px; color: #4a4a4a; margin: 16px 0 0;">For assistance, please contact us at <a href="mailto:support@booking.medhabib.me" style="color: #ff4500; text-decoration: underline;">support@booking.medhabib.me</a>.</p>
                         </td>
                     </tr>
                     <!-- Footer -->
